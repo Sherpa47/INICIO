@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">    
+
+  
+
+
+<style>
+
+/*-- CSS MENU --*/
+
+body, html {
+  margin: 0;
+  font-family: arial;
+  height: 100%;
+  background: #000000;
+}
+  
+h5 {
+  color: #007bff;
+} 
+  
+.modal-dialog {
+   width: 300px;
+   height: 300px;
+   position: absolute;
+   left: 50%;
+   top: 50%; 
+   margin-left: -150px;
+   margin-top: -150px;
+}
+
+
+}  
+  
+.close {
+color: #FFF;
+}  
+  
+.modal-body {
+max-width: 300px;
+max-height: 150px;
+background: #000000;
+color: #FFF;
+font-size: 12px;
+}
+  
+
+.modal-content {
+max-width: 300px;
+max-height: 300px;
+background: #000000;
+border: 4px solid #333;
+border-radius: 30px;
+}
+  
+img {
+max-width: 60%;
+max-height: 2%;
+height: auto;
+width: 150px;
+display: block;
+margin-left: auto;
+margin-right: auto;
+}
+  
+.contenido {
+   min-height:auto;
+   margin: 0;
+}
+
+.separador {
+   background: #000000;
+   height:auto;
+   width: 100%;
+   display: inline-block;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+.nav-mobile {
+  background: 0000000;
+  color: #FFF;
+  padding: 0;
+  margin: 0;
+  cursor: auto;
+  font-size: 22px;
+  list-style-type: none;
+  box-shadow: 0 5px 5px -5px #333;
+}
+.nav-mobile:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.nav-mobile svg {
+  height: 45px;
+  width: 65px;
+  padding: 9px;
+}
+.nav-mobile svg path {
+  fill: #fff;
+}
+.nav-mobile svg.icon-close {
+  display: none;
+  padding: 15px;
+}
+.nav-mobile li {
+  width: 100%;
+  height: 45px;
+  color: white;
+  line-height: 46px;
+  text-align: center;
+  float: left;
+}
+.nav-mobile li a {
+  display: block;
+  color: white;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+}
+.nav-mobile .menu-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+  display: block;
+}
+.nav-mobile .menu-button:after {
+  opacity: 0;
+  top: 45px;
+  content: "";
+  width: 100vw;
+  display: block;
+  position: fixed;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  content: "";
+  pointer-events: none;
+  transition: opacity 0.2s cubic-bezier(0, 0, 0.3, 1);
+  transition-delay: 0.1s;
+}
+.nav-mobile #menu-toggle {
+  display: none;
+}
+.nav-mobile #menu-toggle.active ~ .menu-button .icon-close, .nav-mobile #menu-toggle:checked ~ .menu-button .icon-close {
+  display: block;
+}
+.nav-mobile #menu-toggle.active ~ .menu-button .icon-open, .nav-mobile #menu-toggle:checked ~ .menu-button .icon-open {
+  display: none;
+}
+.nav-mobile #menu-toggle.active ~ .menu-button:after, .nav-mobile #menu-toggle:checked ~ .menu-button:after {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.3s cubic-bezier(0, 0, 0.3, 1);
+}
+.nav-mobile #menu-toggle.active ~ .menu-sidebar, .nav-mobile #menu-toggle:checked ~ .menu-sidebar {
+  transform: translateX(0);
+  transition: transform 0.3s cubic-bezier(0, 0, 0.3, 1);
+}
+.nav-mobile .menu-container {
+  width: 65px;
+  float: left;
+  cursor: pointer;
+  position: absolute;
+}
+.nav-mobile .menu-container .menu-sidebar {
+  box-shadow: 5px 0 5px -5px #333;
+  display: block;
+  overflow-y: scroll;
+  width: 65vw;
+  bottom: 0;
+  background: #333333;
+  color: #333;
+  position: fixed;
+  transform: translateX(-405px);
+  transition: transform 0.3s cubic-bezier(0, 0, 0.3, 1);
+  top: 45px;
+  z-index: 2;
+  list-style-type: none;
+  padding: 0;
+  max-width: 400px;
+}
+.nav-mobile .menu-container .menu-sidebar .arrow {
+  position: absolute;
+  line-height: 50px;
+  font-size: 32px;
+  color: #555;
+  top: 0;
+  z-index: 0;
+}
+.nav-mobile .menu-container .menu-sidebar .arrow.left {
+  left: 25px;
+}
+.nav-mobile .menu-container .menu-sidebar .arrow.right {
+  right: 25px;
+}
+.nav-mobile .menu-container .menu-sidebar li {
+  height: 55px;
+  line-height: 55px;
+  font-size: 16px;
+  text-align: left;
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-left: 20px;
+}
+.nav-mobile .menu-container .menu-sidebar li:hover {
+  background: #333333;
+}
+.nav-mobile .menu-container .menu-sidebar li .menu-sub {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 0;
+  overflow: hidden;
+  background: #333333;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0, 0, 0.3, 1);
+  border-left: 1px solid #ccc;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  z-index: 2;
+  max-width: 400px;
+}
+.nav-mobile .menu-container .menu-sidebar li .menu-sub li {
+  overflow: hidden;
+}
+.nav-mobile .menu-container .menu-sidebar li .menu-sub .menu-sub-title {
+  padding-left: 50px;
+}
+.nav-mobile .menu-container .menu-sidebar li .submenu-label {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.nav-mobile .menu-container .menu-sidebar li .submenu-toggle {
+  display: none;
+}
+.nav-mobile .menu-container .menu-sidebar li .submenu-toggle.active ~ .menu-sub, .nav-mobile .menu-container .menu-sidebar li .submenu-toggle:checked ~ .menu-sub {
+  width: 65vw;
+  visibility: visible;
+  z-index: 1;
+  transition: width 0.35s cubic-bezier(0, 0, 0.3, 1);
+}
+
+ 
+ .logo {
+    float: left;
+    width: 29%;
+    height: 120px;
+    background-color: #00FFFF; /* Black */
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: inset 0 0 0 3px grey;
+    border-radius: 15px;
+    color: #ff000000;
+    padding: 0;
+    margin: 2% 2% 2% 2% ;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;}
+
+.canal_1 {background-image: url("https://raw.githubusercontent.com/Sherpa47/Imagenes/main/Inicio/TELEVISION1.png");}
+.canal_2 {background-image: url("https://raw.githubusercontent.com/Sherpa47/Imagenes/main/Inicio/RADIO1.png");}
+.canal_3 {background-image: url("https://raw.githubusercontent.com/Sherpa47/Imagenes/main/Inicio/PELICULAS1.png");}
+.canal_4 {background-image: url("https://raw.githubusercontent.com/Sherpa47/Imagenes/main/Inicio/SERIES1.png");}
+.canal_5 {background-image: url("https://raw.githubusercontent.com/Sherpa47/Imagenes/main/Inicio/MUSICA1.png");}
+.canal_6 {background-image: url("https://raw.githubusercontent.com/Sherpa47/Imagenes/main/Inicio/JUEGOS1.png");}
+.canal_7 {background-image: url("https://raw.githubusercontent.com/Sherpa47/Imagenes/main/Inicio/INFORMACION1.png");}
+
+.icono {
+    float: left;
+    width: auto;
+    height: auto;
+    background-color: #333333; /* Black */
+    background-size: 15% 60%;
+    background-repeat: no-repeat;
+    background-position: left;
+    color: #ff000000;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;}
+
+.television {background-image: url("https://cdn-icons-png.flaticon.com/512/1866/1866608.png");}
+.radio {background-image: url("https://cdn-icons-png.flaticon.com/512/1527/1527104.png");}
+.peliculas {background-image: url("https://cdn-icons-png.flaticon.com/512/3172/3172555.png");}
+.series {background-image: url("https://cdn-icons-png.flaticon.com/512/3507/3507102.png");}
+.musica {background-image: url("https://cdn-icons-png.flaticon.com/512/1175/1175795.png");}
+.juegos {background-image: url("https://cdn-icons-png.flaticon.com/512/2949/2949874.png");}
+.informacion {background-image: url("https://cdn-icons-png.flaticon.com/512/1076/1076337.png");}
+
+
+  cursor: pointer;}
+
+
+hr.barra2 {
+  position: center;
+  width: 100%;
+  border: 2px solid red;
+  border-radius: 0px;
+  margin-top: 0px;
+
+  
+}
+
+hr.barra1 {
+  margin-top: -5px;
+  position: center;
+  width: 100%;
+  border: 2px solid black;
+  border-radius: 0px;
+}
+
+
+ .boton_compartir {
+    float: right;
+    width: 40px;
+    height: 40px;
+    background-image: url("https://i.ibb.co/XzQV3rD/icono-compartir.jpg");
+    background-color: #00000000; /* Transparente */
+    background-size: 120% 120%;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 4px solid grey;
+    border-radius: 15px;
+    padding: 0;
+    display:block;
+    margin-top: 2%;
+    margin-left: 85%;
+    position:absolute;
+    margin-right: 0;
+    cursor: pointer;}
+
+  
+.img {
+    float: center;
+    width: 30px;
+    height: 30px;
+    background-color: #000000; /* Black */
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: inset 0 0 0 1px black;
+    color: #ff000000;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;}
+
+.pie {background-image: url("https://i.ibb.co/XCBbcQR/508250.png");}
+
+
+.imagen_menu {
+  background-image: url("https://i.ibb.co/DYXbCSD/cooltext272124572499771.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 80% 60%;
+  float: left;
+  font-size: 20px;
+  background-color: #333333;
+  color: #000000;
+  width: 100%;
+  text-align: center;
+  margin: 5px;
+  display: block;
+  border: 4px solid #333333;}
+
+
+.site-footer
+{
+  background-color:#000000;
+  padding:10px 0 5px;
+  font-size:12px;
+  line-height:1px;
+  color:#737373;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  text-align: center;
+}
+
+.site-footer hr
+{
+  border-top-color:#bbb;
+  opacity:0.5
+}
+.site-footer hr.small
+{
+  margin:20px 0
+}
+.site-footer h6
+{
+  color:#fff;
+  font-size:16px;
+  text-transform:uppercase;
+  margin-top:5px;
+  letter-spacing:2px
+}
+.site-footer a
+{
+  color:#737373;
+}
+.site-footer a:hover
+{
+  color:#3366cc;
+  text-decoration:none;
+}
+.footer-links
+{
+  padding-left:0;
+  list-style:none
+}
+.footer-links li
+{
+  display:block
+}
+.footer-links a
+{
+  color:#737373
+}
+.footer-links a:active,.footer-links a:focus,.footer-links a:hover
+{
+  color:#3366cc;
+  text-decoration:none;
+}
+.footer-links.inline li
+{
+  display:inline-block
+}
+.site-footer .social-icons
+{
+  text-align:right
+}
+.site-footer .social-icons a
+{
+  width:40px;
+  height:40px;
+  line-height:40px;
+  margin-left:6px;
+  margin-right:0;
+  border-radius:100%;
+  background-color:#33353d
+}
+.copyright-text
+{
+  margin:0
+}
+@media (max-width:991px)
+{
+  .site-footer [class^=col-]
+  {
+    margin-bottom:30px
+  }
+}
+@media (max-width:767px)
+{
+  .site-footer
+  {
+    padding-bottom:0
+  }
+  .site-footer .copyright-text,.site-footer .social-icons
+  {
+    text-align:center
+  }
+}
+.social-icons
+{
+  padding-left:0;
+  margin-bottom:0;
+  list-style:none
+}
+.social-icons li
+{
+  display:inline-block;
+  margin-bottom:4px
+}
+.social-icons li.title
+{
+  margin-right:15px;
+  text-transform:uppercase;
+  color:#96a2b2;
+  font-weight:700;
+  font-size:13px
+}
+.social-icons a{
+  background-color:#eceeef;
+  color:#818a91;
+  font-size:16px;
+  display:inline-block;
+  line-height:44px;
+  width:44px;
+  height:44px;
+  text-align:center;
+  margin-right:8px;
+  border-radius:100%;
+  -webkit-transition:all .2s linear;
+  -o-transition:all .2s linear;
+  transition:all .2s linear
+}
+.social-icons a:active,.social-icons a:focus,.social-icons a:hover
+{
+  color:#fff;
+  background-color:#29aafe
+}
+.social-icons.size-sm a
+{
+  line-height:34px;
+  height:34px;
+  width:34px;
+  font-size:14px
+}
+.social-icons a.facebook:hover
+{
+  background-color:#3b5998
+}
+.social-icons a.twitter:hover
+{
+  background-color:#00aced
+}
+.social-icons a.linkedin:hover
+{
+  background-color:#007bb6
+}
+.social-icons a.dribbble:hover
+{
+  background-color:#ea4c89
+}
+@media (max-width:767px)
+{
+  .social-icons li.title
+  {
+    display:block;
+    margin-right:0;
+    font-weight:600
+  }
+} 
+
+</style>
+
+
+</head>
+
+<body>
+
+<!-- partial:index.partial.html -->
+  
+<div class="contenido">
+
+<div><a href="http://action_share" class="boton_compartir"></a></div>  
+
+<ul class="nav-mobile">
+
+  
+  <li>Inicio</li>
+  
+  <li class="menu-container">
+    
+    <input id="menu-toggle" type="checkbox">
+    <label for="menu-toggle" class="menu-button">  
+      <svg class="icon-open" viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg>
+      <svg class="icon-close" viewBox="0 0 100 100">
+        <path d="M83.288 88.13c-2.114 2.112-5.575 2.112-7.69 0L53.66 66.188c-2.113-2.112-5.572-2.112-7.686 0l-21.72 21.72c-2.114 2.113-5.572 2.113-7.687 0l-4.693-4.692c-2.114-2.114-2.114-5.573 0-7.688l21.72-21.72c2.112-2.115 2.112-5.574 0-7.687L11.87 24.4c-2.114-2.113-2.114-5.57 0-7.686l4.842-4.842c2.113-2.114 5.57-2.114 7.686 0l21.72 21.72c2.114 2.113 5.572 2.113 7.688 0l21.72-21.72c2.115-2.114 5.574-2.114 7.688 0l4.695 4.695c2.112 2.113 2.112 5.57-.002 7.686l-21.72 21.72c-2.112 2.114-2.112 5.573 0 7.686L88.13 75.6c2.112 2.11 2.112 5.572 0 7.687l-4.842 4.84z"></path>
+      </svg> 
+    </label>      
+    <ul class="menu-sidebar">
+      
+      <div class="imagen_menu"></div>
+      <hr class="barra2">
+      
+      <li><a href="go:TELEVISION" class="icono television">Televisión</a></li>
+      <li><a href="go:RADIO" class="icono radio">Radio</a></li>
+      <li><a href="go:PELICULAS" class="icono peliculas">Películas</a></li>
+      <li><a href="go:SERIES" class="icono series">Series</a></li>
+      <li><a href="go:MUSICA" class="icono musica">Música</a></li>
+      <li><a href="go:JUEGOS" class="icono juegos">Juegos</a></li>
+      <li><a href="go:INFO" class="icono informacion">Información</a></li>
+      <li>
+        <input type="checkbox" id="sub-one" class="submenu-toggle">        
+        <label class="submenu-label" for="sub-one">Category</label>
+        <div class="arrow right">›</div>           
+        <ul class="menu-sub">
+          <li class="menu-sub-title">
+            <label class="submenu-label" for="sub-one">Back</label>
+            <div class="arrow left">‹</div>              
+          </li>        
+          <li><a href="#">Sub-item</a></li>
+          <li><a href="#">Sub-item</a></li>
+          <li><a href="#">Sub-item</a></li>
+          <li><a href="#">Sub-item</a></li>                                
+        </ul>
+      </li>
+      <li>
+        <input type="checkbox" id="sub-two" class="submenu-toggle">        
+        <label class="submenu-label" for="sub-two">Category</label>
+        <div class="arrow right">›</div> 
+        <ul class="menu-sub">
+          <li class="menu-sub-title">
+            <label class="submenu-label" for="sub-two">Back</label>
+            <div class="arrow left">‹</div>              
+          </li>      
+          <li><a href="#">Sub-item</a></li>
+          <li><a href="#">Sub-item</a></li>
+          <li><a href="#">Sub-item</a></li>     
+          <li><a href="#">Sub-item</a></li>                                
+        </ul>              
+      </li>                                         
+    </ul> 
+  </li>
+</ul>
+  
+
+<hr class="barra1">
+
+
+<!-- TELEVISION -->
+
+<div><a href="go:TELEVISION" class="logo canal_1"></a></div>
+
+<!-- RADIO -->
+
+<div><a href="go:RADIO" class="logo canal_2"></a></div>
+
+<!-- PELICULAS -->
+
+<div><a href="go:PELICULAS" class="logo canal_3"></a></div>
+
+<!-- SERIES -->
+
+<div><a href="go:SERIES" class="logo canal_4"></a></div>
+
+<!-- MUSICA -->
+
+<div><a href="go:MUSICA" class="logo canal_5"></a></div>
+
+<!-- JUEGOS -->
+
+<div><a href="go:JUEGOS" class="logo canal_6"></a></div>
+
+<!-- INFORMACION -->
+
+<div><a href="go:INFO" class="logo canal_7"></a></div>
+  
+  <div class="separador"></div>
+
+</div>
+
+
+
+  <!-- Site footer -->
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+       
+
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <ul class="social-icons">
+              <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+              <li><a class="twitter" href="https://t.me/+UEjbMgie9JE4RZLa"><i class="fa fa-telegram"></i></a></li>
+              <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+              <li><a class="linkedin" href="https://x.com/Army23042017"><i class="fa fa-twitter"></i></a></li>   
+            </ul>
+          </div>
+
+        <div class="col-md-8 col-sm-6 col-xs-12">
+            <p class="copyright-text">Copyright © 2022 All Rights Reserved by 
+         <a href="#">⭐ARMY.ind</a>.
+            </p>
+          </div>
+
+        </div>
+      </div>
+</footer>
+
+</body>
+</html>
